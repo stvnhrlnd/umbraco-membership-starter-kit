@@ -1,6 +1,6 @@
-﻿@inherits UmbracoTemplatePage
+﻿@inherits UmbracoViewPage
 @{
-    var home = (Home)Model.Content.Site();
+    var home = (Home)Model.Site();
     var signIn = home.Children<SignIn>().FirstOrDefault();
 }
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -11,10 +11,10 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item @Umbraco.If(Model.Content.Id == home.Id, "active")">
+            <li class="nav-item @Umbraco.If(Model.Id == home.Id, "active")">
                 <a class="nav-link" href="@home.Url">
                     @home.Name
-                    @if (Model.Content.Id == home.Id)
+                    @if (Model.Id == home.Id)
                     {
                         <span class="sr-only">(current)</span>
                     }

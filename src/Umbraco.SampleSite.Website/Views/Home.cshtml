@@ -1,14 +1,14 @@
-﻿@inherits UmbracoTemplatePage<Home>
+﻿@inherits UmbracoViewPage<Home>
 @{
     Layout = "Master.cshtml";
 }
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">@Model.Content.HeroHeader</h1>
-        <p class="lead">@Model.Content.HeroLeadText</p>
+        <h1 class="display-3">@Model.HeroHeader</h1>
+        <p class="lead">@Model.HeroLeadText</p>
         <p>
-            <a class="btn btn-primary btn-lg" href="@Model.Content.HeroCallToActionLink.Url" role="button">
-                @Model.Content.HeroCallToActionText &raquo;
+            <a class="btn btn-primary btn-lg" href="@Model.HeroCallToActionLink.Url" role="button">
+                @Model.HeroCallToActionText &raquo;
             </a>
         </p>
     </div>
