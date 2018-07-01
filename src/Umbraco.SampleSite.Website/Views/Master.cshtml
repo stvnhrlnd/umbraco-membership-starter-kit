@@ -3,11 +3,8 @@
 @{
     var home = (Home)Model.Site();
 
-    Html.RequiresCss("~/css/bootstrap.css");
-
-    Html.RequiresJs("~/scripts/jquery-3.3.1.js");
-    Html.RequiresJs("~/scripts/popper.js");
-    Html.RequiresJs("~/scripts/bootstrap.js");
+    Html.RequiresCssBundle("MasterCss");
+    Html.RequiresJsBundle("MasterScripts");
 }
 <!doctype html>
 <html lang="en">

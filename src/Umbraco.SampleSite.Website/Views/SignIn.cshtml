@@ -1,6 +1,11 @@
 ﻿@inherits UmbracoViewPage<SignIn>
+@using ClientDependency.Core.Mvc
 @{
     Layout = "Master.cshtml";
+
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+    Html.RequiresJsBundle("ValidationScripts");
 }
 <div class="container">
     <div class="row">
