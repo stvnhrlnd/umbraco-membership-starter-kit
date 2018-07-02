@@ -5,12 +5,12 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(model => model.Username)
-        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Enter username" })
+        @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.Password)
-        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
     </div>
     <button type="submit" class="btn btn-primary">Sign In</button>
