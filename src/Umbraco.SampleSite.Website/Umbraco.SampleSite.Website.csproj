@@ -329,6 +329,8 @@
     <Content Include="Views\SignIn.cshtml" />
     <Content Include="Views\Partials\_SignInForm.cshtml" />
     <Content Include="Views\Partials\_Navbar.cshtml" />
+    <Content Include="Views\Register.cshtml" />
+    <Content Include="Views\Partials\_RegisterForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

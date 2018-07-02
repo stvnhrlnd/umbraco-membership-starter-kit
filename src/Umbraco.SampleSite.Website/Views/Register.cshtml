@@ -1,0 +1,17 @@
+﻿@inherits UmbracoViewPage<Register>
+@using ClientDependency.Core.Mvc
+@{
+    Layout = "Master.cshtml";
+
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+    Html.RequiresJsBundle("ValidationScripts");
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4 my-4">Register</h1>
+            @Html.Partial("_RegisterForm", new Umbraco.SampleSite.Models.RegisterModel())
+        </div>
+    </div>
+</div>

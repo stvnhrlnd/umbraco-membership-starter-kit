@@ -2,6 +2,7 @@
 @{
     var home = (Home)Model.Site();
     var signIn = home.Children<SignIn>().FirstOrDefault();
+    var register = home.Children<Register>().FirstOrDefault();
 }
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <span class="navbar-brand">@home.SiteName</span>
@@ -31,10 +32,16 @@
         }
         else
         {
-            if (signIn != null)
-            {
-                <a class="btn btn-outline-success" href="@signIn.Url">@signIn.Name</a>
-            }
+            <div>
+                @if (signIn != null)
+                {
+                    <a class="btn btn-outline-success" href="@signIn.Url">@signIn.Name</a>
+                }
+                @if (register != null)
+                {
+                    <a class="btn btn-success" href="@register.Url">@register.Name</a>
+                }
+            </div>
         }
     </div>
 </nav>
