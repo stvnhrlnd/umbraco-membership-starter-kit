@@ -24,13 +24,16 @@
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group row">
-        @Html.LabelFor(model => model.Username, new { @class = "col-sm-3 col-form-label" })
-        <div class="col-sm-9">
-            @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
-            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+    if (!Model.UsernameIsEmail)
+    {
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Username, new { @class = "col-sm-3 col-form-label" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+    }
     <div class="form-group row">
         @Html.LabelFor(model => model.Password, new { @class = "col-sm-3 col-form-label" })
         <div class="col-sm-9">
