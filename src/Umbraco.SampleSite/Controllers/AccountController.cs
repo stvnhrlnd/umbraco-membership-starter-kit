@@ -45,14 +45,16 @@ namespace Umbraco.SampleSite.Controllers
             }
 
             var home = CurrentPage.Site();
+            var usernameIsEmail = home.GetPropertyValue<bool>("usernameIsEmail");
+            var loginOnSuccess = home.GetPropertyValue<bool>("loginOnSuccess");
 
             var registrationModel = Members.CreateRegistrationModel();
             registrationModel.Name = $"{model.FirstName} {model.Surname}";
             registrationModel.Email = model.Email;
             registrationModel.Username = string.IsNullOrWhiteSpace(model.Username) ? model.Email : model.Username;
-            registrationModel.UsernameIsEmail = home.GetPropertyValue<bool>("usernameIsEmail");
+            registrationModel.UsernameIsEmail = usernameIsEmail;
             registrationModel.Password = model.Password;
-            registrationModel.LoginOnSuccess = home.GetPropertyValue<bool>("loginOnSuccess");
+            registrationModel.LoginOnSuccess = loginOnSuccess;
 
             var member = Members.RegisterMember(
                 registrationModel,
