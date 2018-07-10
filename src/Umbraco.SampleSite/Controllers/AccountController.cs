@@ -78,7 +78,14 @@ namespace Umbraco.SampleSite.Controllers
                     ModelState.AddModelError("Username", "Invalid email.");
                     break;
                 case MembershipCreateStatus.DuplicateUserName:
-                    ModelState.AddModelError("Username", "A member with this username already exists.");
+                    if (usernameIsEmail)
+                    {
+                        ModelState.AddModelError("Email", "A member with this email already exists.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Username", "A member with this username already exists.");
+                    }
                     break;
                 case MembershipCreateStatus.DuplicateEmail:
                     ModelState.AddModelError("Email", "A member with this email already exists.");
