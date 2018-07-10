@@ -11,7 +11,7 @@ namespace Umbraco.SampleSite.Controllers
     {
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignIn(SignInModel model)
+        public ActionResult SignIn(SignInModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -24,7 +24,7 @@ namespace Umbraco.SampleSite.Controllers
                 return CurrentUmbracoPage();
             }
 
-            return Redirect("/");
+            return RedirectToLocal(returnUrl);
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace Umbraco.SampleSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(RegisterModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace Umbraco.SampleSite.Controllers
             switch (status)
             {
                 case MembershipCreateStatus.Success:
-                    return Redirect("/");
+                    return RedirectToLocal(returnUrl);
                 case MembershipCreateStatus.InvalidUserName:
                     ModelState.AddModelError("Username", "Invalid username.");
                     break;
@@ -94,6 +94,16 @@ namespace Umbraco.SampleSite.Controllers
             }
 
             return CurrentUmbracoPage();
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            return Redirect(CurrentPage.Site().Url);
         }
     }
 }

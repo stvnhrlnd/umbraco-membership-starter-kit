@@ -1,5 +1,5 @@
 ﻿@model Umbraco.SampleSite.Models.RegisterModel
-@using (Html.BeginUmbracoForm<Umbraco.SampleSite.Controllers.AccountController>("Register"))
+@using (Html.BeginUmbracoForm<Umbraco.SampleSite.Controllers.AccountController>("Register", new { ReturnUrl = Request["returnUrl"] }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
