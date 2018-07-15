@@ -49,16 +49,17 @@ namespace Umbraco.SampleSite.Controllers
             var loginOnSuccess = home.GetPropertyValue<bool>("loginOnSuccess");
 
             var registrationModel = Members.CreateRegistrationModel();
-            registrationModel.Name = $"{model.FirstName} {model.Surname}";
+            registrationModel.Name = string.Format("{0} {1}", model.FirstName, model.Surname);
             registrationModel.Email = model.Email;
             registrationModel.Username = string.IsNullOrWhiteSpace(model.Username) ? model.Email : model.Username;
             registrationModel.UsernameIsEmail = usernameIsEmail;
             registrationModel.Password = model.Password;
             registrationModel.LoginOnSuccess = loginOnSuccess;
 
+            MembershipCreateStatus status;
             var member = Members.RegisterMember(
                 registrationModel,
-                out MembershipCreateStatus status,
+                out status,
                 registrationModel.LoginOnSuccess);
 
             switch (status)
@@ -94,7 +95,7 @@ namespace Umbraco.SampleSite.Controllers
                 case MembershipCreateStatus.InvalidProviderUserKey:
                 case MembershipCreateStatus.DuplicateProviderUserKey:
                 case MembershipCreateStatus.ProviderError:
-                    ModelState.AddModelError("", $"An error occurred: {status}");
+                    ModelState.AddModelError("", string.Format("An error occurred: {0}", status));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
