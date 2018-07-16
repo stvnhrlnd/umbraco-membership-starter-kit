@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.SampleSite.Models;
 using Umbraco.Web;
+using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
 namespace Umbraco.SampleSite.Controllers
@@ -37,7 +39,7 @@ namespace Umbraco.SampleSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model, string returnUrl)
+        public ActionResult Register(Models.RegisterModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -55,6 +57,12 @@ namespace Umbraco.SampleSite.Controllers
             registrationModel.UsernameIsEmail = usernameIsEmail;
             registrationModel.Password = model.Password;
             registrationModel.LoginOnSuccess = loginOnSuccess;
+
+            registrationModel.MemberProperties = new List<UmbracoProperty>
+            {
+                new UmbracoProperty { Alias = "firstName", Value = model.FirstName },
+                new UmbracoProperty { Alias = "surname", Value = model.Surname }
+            };
 
             MembershipCreateStatus status;
             var member = Members.RegisterMember(
