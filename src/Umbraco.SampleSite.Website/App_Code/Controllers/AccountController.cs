@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.SampleSite.Models;
@@ -49,6 +50,7 @@ namespace Umbraco.SampleSite.Controllers
             var home = CurrentPage.Site();
             var usernameIsEmail = home.GetPropertyValue<bool>("usernameIsEmail");
             var loginOnSuccess = home.GetPropertyValue<bool>("loginOnSuccess");
+            var enableConfirmationEmail = home.GetPropertyValue<bool>("enableConfirmationEmail");
 
             var registrationModel = Members.CreateRegistrationModel();
             registrationModel.Name = string.Format("{0} {1}", model.FirstName, model.Surname);
@@ -63,6 +65,16 @@ namespace Umbraco.SampleSite.Controllers
                 new UmbracoProperty { Alias = "firstName", Value = model.FirstName },
                 new UmbracoProperty { Alias = "surname", Value = model.Surname }
             };
+
+            if (enableConfirmationEmail)
+            {
+                var confirmationToken = Guid.NewGuid().ToString();
+                registrationModel.MemberProperties.Add(new UmbracoProperty
+                {
+                    Alias = "confirmationToken",
+                    Value = confirmationToken
+                });
+            }
 
             MembershipCreateStatus status;
             var member = Members.RegisterMember(
@@ -110,6 +122,36 @@ namespace Umbraco.SampleSite.Controllers
             }
 
             return CurrentUmbracoPage();
+        }
+
+        [ChildActionOnly]
+        public ActionResult ConfirmEmail(string token)
+        {
+            var model = new ConfirmEmailModel();
+
+            if (string.IsNullOrEmpty(token))
+            {
+                model.TokenEmpty = true;
+            }
+            else
+            {
+                var member = Services.MemberService
+                    .GetMembersByPropertyValue("confirmationToken", token)
+                    .FirstOrDefault();
+
+                if (member == null)
+                {
+                    model.TokenInvalid = true;
+                }
+                else
+                {
+                    member.SetValue("confirmationToken", null);
+                    member.SetValue("confirmationDate", DateTime.Now);
+                    Services.MemberService.Save(member);
+                }
+            }
+            
+            return PartialView("_ConfirmEmail", model);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
