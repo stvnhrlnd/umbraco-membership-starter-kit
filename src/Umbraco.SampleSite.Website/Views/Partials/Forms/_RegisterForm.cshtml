@@ -1,4 +1,4 @@
-﻿@model Umbraco.SampleSite.Models.RegisterModel
+﻿@model Umbraco.SampleSite.Models.ViewModels.RegisterViewModel
 @using (Html.BeginUmbracoForm<Umbraco.SampleSite.Controllers.AccountController>("Register", new { ReturnUrl = Request["returnUrl"] }))
 {
     @Html.AntiForgeryToken()

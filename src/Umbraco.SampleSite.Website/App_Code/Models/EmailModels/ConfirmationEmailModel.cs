@@ -1,4 +1,4 @@
-﻿namespace Umbraco.SampleSite.Models
+﻿namespace Umbraco.SampleSite.Models.EmailModels
 {
     public class ConfirmationEmailModel
     {

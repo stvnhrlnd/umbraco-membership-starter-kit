@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Umbraco.SampleSite.Models
+namespace Umbraco.SampleSite.Models.ViewModels
 {
-    public class RegisterModel
+    public class RegisterViewModel
     {
         [Required]
         [Display(Name = "First name")]

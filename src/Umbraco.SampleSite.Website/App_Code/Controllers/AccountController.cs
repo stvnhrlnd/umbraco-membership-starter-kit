@@ -6,7 +6,8 @@ using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Core;
-using Umbraco.SampleSite.Models;
+using Umbraco.SampleSite.Models.EmailModels;
+using Umbraco.SampleSite.Models.ViewModels;
 using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
@@ -17,7 +18,7 @@ namespace Umbraco.SampleSite.Controllers
     {
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignIn(SignInModel model, string returnUrl)
+        public ActionResult SignIn(SignInViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -43,7 +44,7 @@ namespace Umbraco.SampleSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Models.RegisterModel model, string returnUrl)
+        public ActionResult Register(RegisterViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -181,7 +182,7 @@ namespace Umbraco.SampleSite.Controllers
             {
                 Subject = string.Format("Welcome to {0} - Please confirm your email address", siteName),
                 IsBodyHtml = true,
-                Body = RenderPartial("_ConfirmationEmail", new ConfirmationEmailModel
+                Body = RenderPartial("Emails/_ConfirmationEmail", new ConfirmationEmailModel
                 {
                     SiteName = siteName,
                     FirstName = member.GetValue<string>("firstName"),

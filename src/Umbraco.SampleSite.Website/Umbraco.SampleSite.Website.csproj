@@ -290,9 +290,9 @@
   <ItemGroup>
     <Content Include="App_Code\Controllers\AccountController.cs" />
     <Content Include="App_Code\Events\UmbracoEvents.cs" />
-    <Content Include="App_Code\Models\RegisterModel.cs" />
-    <Content Include="App_Code\Models\SignInModel.cs" />
-    <Content Include="App_Code\Models\ConfirmationEmailModel.cs" />
+    <Content Include="App_Code\Models\ViewModels\RegisterViewModel.cs" />
+    <Content Include="App_Code\Models\ViewModels\SignInViewModel.cs" />
+    <Content Include="App_Code\Models\EmailModels\ConfirmationEmailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -334,13 +334,13 @@
     <Content Include="Views\Home.cshtml" />
     <Content Include="Views\Master.cshtml" />
     <Content Include="Views\SignIn.cshtml" />
-    <Content Include="Views\Partials\_SignInForm.cshtml" />
+    <Content Include="Views\Partials\Forms\_SignInForm.cshtml" />
     <Content Include="Views\Partials\_Navbar.cshtml" />
     <Content Include="Views\Register.cshtml" />
-    <Content Include="Views\Partials\_RegisterForm.cshtml" />
+    <Content Include="Views\Partials\Forms\_RegisterForm.cshtml" />
     <Content Include="Views\ConfirmEmail.cshtml" />
     <Content Include="Views\Partials\_ConfirmEmail.cshtml" />
-    <Content Include="Views\Partials\_ConfirmationEmail.cshtml" />
+    <Content Include="Views\Partials\Emails\_ConfirmationEmail.cshtml" />
     <Content Include="Views\Partials\_Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

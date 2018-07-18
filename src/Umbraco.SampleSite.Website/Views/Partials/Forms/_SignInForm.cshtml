@@ -1,4 +1,4 @@
-﻿@model Umbraco.SampleSite.Models.SignInModel
+﻿@model Umbraco.SampleSite.Models.ViewModels.SignInViewModel
 @using (Html.BeginUmbracoForm<Umbraco.SampleSite.Controllers.AccountController>("SignIn", new { ReturnUrl = Request["returnUrl"] }))
 {
     @Html.AntiForgeryToken()
