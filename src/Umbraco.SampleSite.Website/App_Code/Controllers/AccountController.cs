@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Security;
+using Umbraco.Core;
 using Umbraco.SampleSite.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
@@ -66,16 +69,6 @@ namespace Umbraco.SampleSite.Controllers
                 new UmbracoProperty { Alias = "surname", Value = model.Surname }
             };
 
-            if (enableConfirmationEmail)
-            {
-                var confirmationToken = Guid.NewGuid().ToString();
-                registrationModel.MemberProperties.Add(new UmbracoProperty
-                {
-                    Alias = "confirmationToken",
-                    Value = confirmationToken
-                });
-            }
-
             MembershipCreateStatus status;
             var member = Members.RegisterMember(
                 registrationModel,
@@ -85,6 +78,10 @@ namespace Umbraco.SampleSite.Controllers
             switch (status)
             {
                 case MembershipCreateStatus.Success:
+                    if (enableConfirmationEmail)
+                    {
+                        SendConfirmationEmail(member.Email);
+                    }
                     return RedirectToLocal(returnUrl);
                 case MembershipCreateStatus.InvalidUserName:
                     ModelState.AddModelError("Username", "Invalid username.");
@@ -150,7 +147,7 @@ namespace Umbraco.SampleSite.Controllers
                     Services.MemberService.Save(member);
                 }
             }
-            
+
             return PartialView("_ConfirmEmail", model);
         }
 
@@ -162,6 +159,55 @@ namespace Umbraco.SampleSite.Controllers
             }
 
             return Redirect(CurrentPage.Site().Url);
+        }
+
+        private void SendConfirmationEmail(string email)
+        {
+            var member = Services.MemberService.GetByEmail(email);
+            var confirmationToken = Guid.NewGuid().ToString();
+            member.SetValue("confirmationToken", confirmationToken);
+            Services.MemberService.Save(member);
+
+            var home = CurrentPage.Site();
+            var siteName = home.GetPropertyValue<string>("siteName");
+            var confirmEmailPage = home.Children
+                .Where(x => x.DocumentTypeAlias == "confirmEmail")
+                .First();
+            var confirmEmailUrl = string.Format(
+                "{0}?token={1}",
+                confirmEmailPage.UrlWithDomain(),
+                confirmationToken);
+
+            var emailSender = new EmailSender();
+            var mailMessage = new MailMessage
+            {
+                Subject = string.Format("Welcome to {0} - Please confirm your email address", siteName),
+                IsBodyHtml = true,
+                Body = RenderPartial("_ConfirmationEmail", new ConfirmationEmailModel
+                {
+                    SiteName = siteName,
+                    FirstName = member.GetValue<string>("firstName"),
+                    ConfirmEmailUrl = confirmEmailUrl
+                })
+            };
+            mailMessage.To.Add(email);
+            emailSender.Send(mailMessage);
+        }
+
+        private string RenderPartial(string name, object model)
+        {
+            using (var stringWriter = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, name);
+                var viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    new ViewDataDictionary { Model = model },
+                    new TempDataDictionary(),
+                    stringWriter);
+                viewResult.View.Render(viewContext, stringWriter);
+                return stringWriter.GetStringBuilder().ToString();
+            }
         }
     }
 }

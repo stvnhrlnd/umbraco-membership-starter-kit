@@ -293,6 +293,7 @@
     <Content Include="App_Code\Models\RegisterModel.cs" />
     <Content Include="App_Code\Models\SignInModel.cs" />
     <Content Include="App_Code\Models\ConfirmEmailModel.cs" />
+    <Content Include="App_Code\Models\ConfirmationEmailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -340,6 +341,7 @@
     <Content Include="Views\Partials\_RegisterForm.cshtml" />
     <Content Include="Views\ConfirmEmail.cshtml" />
     <Content Include="Views\Partials\_ConfirmEmail.cshtml" />
+    <Content Include="Views\Partials\_ConfirmationEmail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
