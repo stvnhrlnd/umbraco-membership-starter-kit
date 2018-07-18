@@ -1,5 +1,5 @@
 ﻿@model Umbraco.SampleSite.Models.ViewModels.SignInViewModel
-@using (Html.BeginUmbracoForm<Umbraco.SampleSite.Controllers.AccountController>("SignIn", new { ReturnUrl = Request["returnUrl"] }))
+@using (Html.BeginUmbracoForm<Umbraco.SampleSite.Controllers.SignInController>("SignIn", new { ReturnUrl = Request["returnUrl"] }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })

@@ -293,6 +293,9 @@
     <Content Include="App_Code\Models\ViewModels\RegisterViewModel.cs" />
     <Content Include="App_Code\Models\ViewModels\SignInViewModel.cs" />
     <Content Include="App_Code\Models\EmailModels\ConfirmationEmailModel.cs" />
+    <Content Include="App_Code\Controllers\SignInController.cs" />
+    <Content Include="App_Code\Controllers\RegisterController.cs" />
+    <Content Include="App_Code\Controllers\ConfirmEmailController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,7 @@
         </ul>
         @if (Members.IsLoggedIn())
         {
-            using (Html.BeginUmbracoForm<Umbraco.SampleSite.Controllers.AccountController>("SignOut"))
+            using (Html.BeginUmbracoForm<Umbraco.SampleSite.Controllers.SignInController>("SignOut"))
             {
                 @Html.AntiForgeryToken()
                 <button type="submit" class="btn btn-outline-success">Sign Out</button>
