@@ -124,11 +124,9 @@ namespace Umbraco.SampleSite.Controllers
         [ChildActionOnly]
         public ActionResult ConfirmEmail(string token)
         {
-            var model = new ConfirmEmailModel();
-
             if (string.IsNullOrEmpty(token))
             {
-                model.TokenEmpty = true;
+                return PartialView("_Error");
             }
             else
             {
@@ -138,7 +136,7 @@ namespace Umbraco.SampleSite.Controllers
 
                 if (member == null)
                 {
-                    model.TokenInvalid = true;
+                    return PartialView("_Error");
                 }
                 else
                 {
@@ -148,7 +146,7 @@ namespace Umbraco.SampleSite.Controllers
                 }
             }
 
-            return PartialView("_ConfirmEmail", model);
+            return PartialView("_ConfirmEmail");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

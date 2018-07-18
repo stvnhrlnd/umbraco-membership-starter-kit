@@ -292,7 +292,6 @@
     <Content Include="App_Code\Events\UmbracoEvents.cs" />
     <Content Include="App_Code\Models\RegisterModel.cs" />
     <Content Include="App_Code\Models\SignInModel.cs" />
-    <Content Include="App_Code\Models\ConfirmEmailModel.cs" />
     <Content Include="App_Code\Models\ConfirmationEmailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -342,6 +341,7 @@
     <Content Include="Views\ConfirmEmail.cshtml" />
     <Content Include="Views\Partials\_ConfirmEmail.cshtml" />
     <Content Include="Views\Partials\_ConfirmationEmail.cshtml" />
+    <Content Include="Views\Partials\_Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

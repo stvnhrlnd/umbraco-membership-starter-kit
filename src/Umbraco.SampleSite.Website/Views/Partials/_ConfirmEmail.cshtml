@@ -1,18 +1,4 @@
-﻿@model Umbraco.SampleSite.Models.ConfirmEmailModel
-<div class="text-center">
-    @if (Model.TokenEmpty)
-    {
-        <h1 class="display-4 my-4">Bad Request</h1>
-        <p>Confirmation token was not provided.</p>
-    }
-    else if (Model.TokenInvalid)
-    {
-        <h1 class="display-4 my-4">Invalid Token</h1>
-        <p>Member was not found.</p>
-    }
-    else
-    {
-        <h1 class="display-4 my-4">Email Confirmed</h1>
-        <p>Thank you for confirming your email!</p>
-    }
+﻿<div class="text-center">
+    <h1 class="display-4 my-4">Email Confirmed</h1>
+    <p>Thank you for confirming your email!</p>
 </div>
