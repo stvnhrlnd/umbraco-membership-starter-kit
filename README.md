@@ -1,1 +1,0 @@
-# umbraco-sample-site
