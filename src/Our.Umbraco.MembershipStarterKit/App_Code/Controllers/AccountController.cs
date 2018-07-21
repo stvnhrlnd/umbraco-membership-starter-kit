@@ -32,8 +32,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             var home = CurrentPage.Site();
             var siteName = home.GetPropertyValue<string>("siteName");
             var confirmEmailPage = home.Children
-                .Where(x => x.DocumentTypeAlias == "confirmEmail")
-                .First();
+                .First(x => x.DocumentTypeAlias == "confirmEmail");
             var confirmEmailUrl = string.Format(
                 "{0}?token={1}",
                 confirmEmailPage.UrlWithDomain(),
