@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Umbraco.Web;
+using Umbraco.Web.Mvc;
 
 namespace Our.Umbraco.MembershipStarterKit.Controllers
 {
@@ -23,6 +24,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
         }
 
         [HttpPost]
+        [NotChildAction]
         [ValidateAntiForgeryToken]
         public ActionResult SignIn(SignInViewModel model, string returnUrl)
         {
