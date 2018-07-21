@@ -13,23 +13,19 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             {
                 return PartialView("_Error");
             }
-            else
-            {
-                var member = Services.MemberService
-                    .GetMembersByPropertyValue("confirmationToken", token)
-                    .FirstOrDefault();
 
-                if (member == null)
-                {
-                    return PartialView("_Error");
-                }
-                else
-                {
-                    member.SetValue("confirmationToken", null);
-                    member.SetValue("confirmationDate", DateTime.Now);
-                    Services.MemberService.Save(member);
-                }
+            var member = Services.MemberService
+                .GetMembersByPropertyValue("confirmationToken", token)
+                .FirstOrDefault();
+
+            if (member == null)
+            {
+                return PartialView("_Error");
             }
+
+            member.SetValue("confirmationToken", null);
+            member.SetValue("confirmationDate", DateTime.Now);
+            Services.MemberService.Save(member);
 
             return PartialView("_ConfirmEmail");
         }
