@@ -313,6 +313,9 @@
     <Content Include="App_Code\Models\EmailModels\ConfirmationEmailModel.cs" />
     <Content Include="App_Code\Models\ViewModels\RegisterViewModel.cs" />
     <Content Include="App_Code\Models\ViewModels\SignInViewModel.cs" />
+    <Content Include="App_Code\Models\ViewModels\ForgotPasswordViewModel.cs" />
+    <Content Include="App_Code\Controllers\ForgotPasswordController.cs" />
+    <Content Include="App_Code\Models\EmailModels\PasswordResetEmailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -366,6 +369,10 @@
     <Content Include="Views\Master.cshtml" />
     <Content Include="Views\Register.cshtml" />
     <Content Include="Views\SignIn.cshtml" />
+    <Content Include="Views\ForgotPassword.cshtml" />
+    <Content Include="Views\Partials\Forms\_ForgotPasswordForm.cshtml" />
+    <Content Include="Views\Partials\Emails\_PasswordResetEmail.cshtml" />
+    <Content Include="Views\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

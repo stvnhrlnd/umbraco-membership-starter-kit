@@ -54,7 +54,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             emailSender.Send(mailMessage);
         }
 
-        private string RenderPartial(string name, object model)
+        protected string RenderPartial(string name, object model)
         {
             using (var stringWriter = new StringWriter())
             {

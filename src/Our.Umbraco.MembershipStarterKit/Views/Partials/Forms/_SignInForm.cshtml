@@ -15,6 +15,12 @@
         <div class="col-sm-9">
             @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            @if (!string.IsNullOrWhiteSpace(Model.ForgotPasswordUrl))
+            {
+                <a class="d-block font-weight-light mt-1" href="@Model.ForgotPasswordUrl">
+                    Forgot password?
+                </a>
+            }
         </div>
     </div>
     <div class="text-center">
