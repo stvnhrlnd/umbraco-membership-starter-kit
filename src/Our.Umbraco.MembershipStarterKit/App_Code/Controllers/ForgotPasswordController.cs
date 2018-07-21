@@ -15,6 +15,11 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return CurrentUmbracoPage();
+            }
+
             if (Members.GetByEmail(model.Email) != null)
             {
                 SendPasswordResetEmail(model.Email);
