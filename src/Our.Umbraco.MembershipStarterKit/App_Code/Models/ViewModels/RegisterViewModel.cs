@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Our.Umbraco.MembershipStarterKit.Models.ViewModels
 {
@@ -14,9 +15,11 @@ namespace Our.Umbraco.MembershipStarterKit.Models.ViewModels
 
         [Required]
         [EmailAddress]
+        [Remote("IsEmailAvailable", "Register", ErrorMessage = "A member with this email already exists.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Remote("IsUsernameAvailable", "Register", ErrorMessage = "A member with this username already exists.")]
         [Display(Name = "Username")]
         public string Username { get; set; }
 

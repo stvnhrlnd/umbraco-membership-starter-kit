@@ -89,5 +89,19 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
 
             return CurrentUmbracoPage();
         }
+
+        [HttpGet]
+        public JsonResult IsEmailAvailable(string email)
+        {
+            var member = Members.GetByEmail(email);
+            return Json(member == null, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult IsUsernameAvailable(string username)
+        {
+            var member = Members.GetByUsername(username);
+            return Json(member == null, JsonRequestBehavior.AllowGet);
+        }
     }
 }
