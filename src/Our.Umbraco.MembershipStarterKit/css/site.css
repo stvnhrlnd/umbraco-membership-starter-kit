@@ -1,0 +1,7 @@
+﻿.input-validation-error {
+    border-color: #dc3545;
+}
+
+    .input-validation-error ~ .invalid-feedback {
+        display: block;
+    }

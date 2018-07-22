@@ -7,14 +7,14 @@
         @Html.LabelFor(model => model.Username, new { @class = "col-sm-3 col-form-label" })
         <div class="col-sm-9">
             @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
-            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "invalid-feedback" })
         </div>
     </div>
     <div class="form-group row">
         @Html.LabelFor(model => model.Password, new { @class = "col-sm-3 col-form-label" })
         <div class="col-sm-9">
             @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "invalid-feedback" })
             @if (!string.IsNullOrWhiteSpace(Model.ForgotPasswordUrl))
             {
                 <a class="d-block font-weight-light mt-1" href="@Model.ForgotPasswordUrl">
