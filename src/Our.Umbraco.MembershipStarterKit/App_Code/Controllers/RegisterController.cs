@@ -20,15 +20,14 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             }
 
             var home = CurrentPage.Site();
-            var usernameIsEmail = home.GetPropertyValue<bool>("usernameIsEmail");
             var loginOnSuccess = home.GetPropertyValue<bool>("loginOnSuccess");
             var enableConfirmationEmail = home.GetPropertyValue<bool>("enableConfirmationEmail");
 
             var registrationModel = Members.CreateRegistrationModel();
             registrationModel.Name = string.Format("{0} {1}", model.FirstName, model.Surname);
             registrationModel.Email = model.Email;
-            registrationModel.Username = string.IsNullOrWhiteSpace(model.Username) ? model.Email : model.Username;
-            registrationModel.UsernameIsEmail = usernameIsEmail;
+            registrationModel.Username = model.Username;
+            registrationModel.UsernameIsEmail = false;
             registrationModel.Password = model.Password;
             registrationModel.LoginOnSuccess = loginOnSuccess;
 
@@ -65,14 +64,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
                     ModelState.AddModelError("Username", "Invalid email.");
                     break;
                 case MembershipCreateStatus.DuplicateUserName:
-                    if (usernameIsEmail)
-                    {
-                        ModelState.AddModelError("Email", "A member with this email already exists.");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Username", "A member with this username already exists.");
-                    }
+                    ModelState.AddModelError("Username", "A member with this username already exists.");
                     break;
                 case MembershipCreateStatus.DuplicateEmail:
                     ModelState.AddModelError("Email", "A member with this email already exists.");

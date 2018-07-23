@@ -18,12 +18,12 @@ namespace Our.Umbraco.MembershipStarterKit.Models.ViewModels
         [Remote("IsEmailAvailable", "Register", ErrorMessage = "A member with this email already exists.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
+        
+        [Required]
+        [RegularExpression(@"^[a-zA-Z0-9_]{1,15}$")]
         [Remote("IsUsernameAvailable", "Register", ErrorMessage = "A member with this username already exists.")]
         [Display(Name = "Username")]
         public string Username { get; set; }
-
-        public bool UsernameIsEmail { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
