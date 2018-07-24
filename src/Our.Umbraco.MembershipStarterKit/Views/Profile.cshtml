@@ -1,0 +1,21 @@
+﻿@inherits UmbracoViewPage<Profile>
+@{
+    Layout = "Master.cshtml";
+}
+@if (Members.IsLoggedIn())
+{
+    var profile = Members.GetCurrentMemberProfileModel();
+    <div class="container mt-4">
+        <div class="media">
+            @Html.GravatarImage(profile.Email, 100, cssClass: "mr-3 shadow p-1 mb-3 bg-white rounded")
+            <div class="media-body">
+                <h4 class="mt-0">@profile.Name</h4>
+                <h5 class="font-weight-light">@profile.UserName</h5>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    @Html.Partial("_Error")
+}

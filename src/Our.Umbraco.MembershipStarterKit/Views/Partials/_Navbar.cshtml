@@ -1,8 +1,6 @@
 ﻿@inherits UmbracoViewPage
 @{
-    var home = (Home)Model.Site();
-    var signIn = home.Children<SignIn>().FirstOrDefault();
-    var register = home.Children<Register>().FirstOrDefault();
+    var home = (Home)Model.Site();    
 }
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <span class="navbar-brand">@home.SiteName</span>
@@ -26,12 +24,20 @@
         {
             using (Html.BeginUmbracoForm<Our.Umbraco.MembershipStarterKit.Controllers.SignInController>("SignOut"))
             {
+                var profilePage = home.Children<Profile>().FirstOrDefault();
+                var profileModel = Members.GetCurrentMemberProfileModel();
+                if (profilePage != null)
+                {
+                    <a class="btn btn-dark" href="@profilePage.Url">@profileModel.UserName</a>
+                }
                 @Html.AntiForgeryToken()
                 <button type="submit" class="btn btn-outline-success">Sign Out</button>
             }
         }
         else
         {
+            var signIn = home.Children<SignIn>().FirstOrDefault();
+            var register = home.Children<Register>().FirstOrDefault();
             <div>
                 @if (signIn != null)
                 {
