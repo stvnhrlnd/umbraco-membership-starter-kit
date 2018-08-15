@@ -6,7 +6,7 @@ using Umbraco.Web.Mvc;
 
 namespace Our.Umbraco.MembershipStarterKit.Controllers
 {
-    public class SignInController : AccountController
+    public class SignInController : BaseSurfaceController
     {
         [ChildActionOnly]
         public ActionResult SignIn()

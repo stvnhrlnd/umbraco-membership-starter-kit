@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 namespace Our.Umbraco.MembershipStarterKit.Controllers
 {
-    public class ConfirmEmailController : AccountController
+    public class ConfirmEmailController : BaseSurfaceController
     {
         [ChildActionOnly]
         public ActionResult ConfirmEmail(string token)

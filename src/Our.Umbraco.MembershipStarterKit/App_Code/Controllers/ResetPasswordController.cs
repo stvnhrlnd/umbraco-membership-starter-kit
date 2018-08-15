@@ -8,7 +8,7 @@ using Umbraco.Web.Mvc;
 
 namespace Our.Umbraco.MembershipStarterKit.Controllers
 {
-    public class ResetPasswordController : AccountController
+    public class ResetPasswordController : BaseSurfaceController
     {
         [ChildActionOnly]
         public ActionResult ResetPassword(string token)

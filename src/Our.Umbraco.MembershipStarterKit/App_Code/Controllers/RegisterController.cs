@@ -1,14 +1,18 @@
-﻿using Our.Umbraco.MembershipStarterKit.Models.ViewModels;
+﻿using Our.Umbraco.MembershipStarterKit.Models.EmailModels;
+using Our.Umbraco.MembershipStarterKit.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Security;
+using Umbraco.Core;
 using Umbraco.Web;
 using Umbraco.Web.Models;
 
 namespace Our.Umbraco.MembershipStarterKit.Controllers
 {
-    public class RegisterController : AccountController
+    public class RegisterController : BaseSurfaceController
     {
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -94,6 +98,38 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
         {
             var member = Members.GetByUsername(username);
             return Json(member == null, JsonRequestBehavior.AllowGet);
+        }
+
+        private void SendConfirmationEmail(string email)
+        {
+            var member = Services.MemberService.GetByEmail(email);
+            var confirmationToken = Guid.NewGuid().ToString();
+            member.SetValue("confirmationToken", confirmationToken);
+            Services.MemberService.Save(member);
+
+            var home = CurrentPage.Site();
+            var siteName = home.GetPropertyValue<string>("siteName");
+            var confirmEmailPage = home.Children
+                .First(x => x.DocumentTypeAlias == "confirmEmail");
+            var confirmEmailUrl = string.Format(
+                "{0}?token={1}",
+                confirmEmailPage.UrlWithDomain(),
+                confirmationToken);
+
+            var emailSender = new EmailSender();
+            var mailMessage = new MailMessage
+            {
+                Subject = string.Format("Welcome to {0} - Please confirm your email address", siteName),
+                IsBodyHtml = true,
+                Body = RenderPartial("Emails/_ConfirmationEmail", new ConfirmationEmailModel
+                {
+                    SiteName = siteName,
+                    FirstName = member.GetValue<string>("firstName"),
+                    ConfirmEmailUrl = confirmEmailUrl
+                })
+            };
+            mailMessage.To.Add(email);
+            emailSender.Send(mailMessage);
         }
     }
 }

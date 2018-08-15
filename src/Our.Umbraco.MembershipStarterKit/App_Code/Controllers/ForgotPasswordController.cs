@@ -9,7 +9,7 @@ using Umbraco.Web;
 
 namespace Our.Umbraco.MembershipStarterKit.Controllers
 {
-    public class ForgotPasswordController : AccountController
+    public class ForgotPasswordController : BaseSurfaceController
     {
         [HttpPost]
         [ValidateAntiForgeryToken]

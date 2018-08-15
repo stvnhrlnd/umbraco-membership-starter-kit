@@ -308,7 +308,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\Controllers\AccountController.cs" />
+    <Content Include="App_Code\Controllers\BaseSurfaceController.cs" />
     <Content Include="App_Code\Controllers\ConfirmEmailController.cs" />
     <Content Include="App_Code\Controllers\RegisterController.cs" />
     <Content Include="App_Code\Controllers\SignInController.cs" />
