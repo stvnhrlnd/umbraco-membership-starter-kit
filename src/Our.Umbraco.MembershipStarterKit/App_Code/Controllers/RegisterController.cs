@@ -54,6 +54,22 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
                     {
                         SendConfirmationEmail(member.Email);
                     }
+
+                    var alertText = "Registration successful - ";
+                    if (loginOnSuccess)
+                    {
+                        alertText += "you are now logged in.";
+                    }
+                    else if (enableConfirmationEmail)
+                    {
+                        alertText += "before signing in please confirm your email address.";
+                    }
+                    else
+                    {
+                        alertText += "you can now sign in.";
+                    }
+
+                    Alert("success", alertText);
                     return RedirectToLocal(returnUrl);
                 case MembershipCreateStatus.InvalidUserName:
                     ModelState.AddModelError("Username", "Invalid username.");
@@ -77,7 +93,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
                 case MembershipCreateStatus.InvalidProviderUserKey:
                 case MembershipCreateStatus.DuplicateProviderUserKey:
                 case MembershipCreateStatus.ProviderError:
-                    ModelState.AddModelError("", string.Format("An error occurred: {0}", status));
+                    Alert("danger", string.Format("An error occurred: {0}", status));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

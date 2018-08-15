@@ -41,7 +41,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             var member = GetMemberByPasswordResetToken(model.Token);
             if (member == null || !IsPasswordResetTokenValid(member))
             {
-                ModelState.AddModelError("", "Invalid or expired password reset token.");
+                Alert("danger", "Invalid or expired password reset token.");
                 return CurrentUmbracoPage();
             }
 
@@ -52,6 +52,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
 
             var signIn = CurrentPage.Site()
                 .Children.First(x => x.DocumentTypeAlias == "signIn");
+            Alert("success", "Your password has been reset - you can now sign in.");
             return RedirectToUmbracoPage(signIn);
         }
 

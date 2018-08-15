@@ -23,6 +23,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             if (Members.GetByEmail(model.Email) != null)
             {
                 SendPasswordResetEmail(model.Email);
+                Alert("success", "Password reset email sent!");
             }
             
             return Redirect("/");

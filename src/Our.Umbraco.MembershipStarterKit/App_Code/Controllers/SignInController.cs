@@ -35,7 +35,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
 
             if (!Members.Login(model.Username, model.Password))
             {
-                ModelState.AddModelError("", "Invalid login attempt.");
+                Alert("danger", "Invalid login attempt.");
                 return CurrentUmbracoPage();
             }
 

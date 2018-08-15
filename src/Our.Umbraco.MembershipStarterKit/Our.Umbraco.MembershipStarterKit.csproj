@@ -322,6 +322,7 @@
     <Content Include="App_Code\Models\ViewModels\ResetPasswordViewModel.cs" />
     <Content Include="App_Code\Controllers\ResetPasswordController.cs" />
     <Content Include="App_Code\Extensions\GravatarHtmlHelper_Net40.cs" />
+    <Content Include="App_Code\Models\ViewModels\AlertViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -381,6 +382,7 @@
     <Content Include="Views\ResetPassword.cshtml" />
     <Content Include="Views\Partials\Forms\_ResetPasswordForm.cshtml" />
     <Content Include="Views\Profile.cshtml" />
+    <Content Include="Views\Partials\_Alert.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
