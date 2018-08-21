@@ -25,8 +25,8 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
                 SendPasswordResetEmail(model.Email);
                 Alert("success", "Password reset email sent!");
             }
-            
-            return Redirect("/");
+
+            return RedirectToCurrentUmbracoPage();
         }
 
         private void SendPasswordResetEmail(string email)
