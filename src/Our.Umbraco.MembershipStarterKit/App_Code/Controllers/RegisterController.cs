@@ -16,7 +16,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
     {
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterViewModel model, string returnUrl)
+        public ActionResult Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -24,8 +24,6 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             }
 
             var home = CurrentPage.Site();
-            var loginOnSuccess = home.GetPropertyValue<bool>("loginOnSuccess");
-            var enableConfirmationEmail = home.GetPropertyValue<bool>("enableConfirmationEmail");
 
             var registrationModel = Members.CreateRegistrationModel();
             registrationModel.Name = string.Format("{0} {1}", model.FirstName, model.Surname);
@@ -33,7 +31,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             registrationModel.Username = model.Username;
             registrationModel.UsernameIsEmail = false;
             registrationModel.Password = model.Password;
-            registrationModel.LoginOnSuccess = loginOnSuccess;
+            registrationModel.LoginOnSuccess = false;
 
             registrationModel.MemberProperties = new List<UmbracoProperty>
             {
@@ -50,27 +48,9 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             switch (status)
             {
                 case MembershipCreateStatus.Success:
-                    if (enableConfirmationEmail)
-                    {
-                        SendConfirmationEmail(member.Email);
-                    }
-
-                    var alertText = "Registration successful - ";
-                    if (loginOnSuccess)
-                    {
-                        alertText += "you are now logged in.";
-                    }
-                    else if (enableConfirmationEmail)
-                    {
-                        alertText += "before signing in please confirm your email address.";
-                    }
-                    else
-                    {
-                        alertText += "you can now sign in.";
-                    }
-
-                    Alert("success", alertText);
-                    return RedirectToLocal(returnUrl);
+                    SendConfirmationEmail(member.Email);
+                    Alert("success", "Registration successful - please confirm your email address to sign in.");
+                    return RedirectToCurrentUmbracoPage();
                 case MembershipCreateStatus.InvalidUserName:
                     ModelState.AddModelError("Username", "Invalid username.");
                     break;

@@ -1,6 +1,7 @@
 ﻿using Our.Umbraco.MembershipStarterKit.Models.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
@@ -33,12 +34,20 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
                 return CurrentUmbracoPage();
             }
 
-            if (!Members.Login(model.Username, model.Password))
+            if (!Membership.ValidateUser(model.Username, model.Password))
             {
                 Alert("danger", "Invalid login attempt.");
                 return CurrentUmbracoPage();
             }
 
+            var member = Members.GetByUsername(model.Username);
+            if (!member.HasValue("confirmationDate"))
+            {
+                Alert("danger", "Please confirm your email address to sign in.");
+                return CurrentUmbracoPage();
+            }
+
+            FormsAuthentication.SetAuthCookie(model.Username, true);
             return RedirectToLocal(returnUrl);
         }
 
