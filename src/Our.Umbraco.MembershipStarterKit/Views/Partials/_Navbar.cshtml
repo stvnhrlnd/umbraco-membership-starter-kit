@@ -1,6 +1,7 @@
-﻿@inherits UmbracoViewPage
+﻿@using Our.Umbraco.MembershipStarterKit.Controllers
+@inherits UmbracoViewPage
 @{
-    var home = (Home)Model.Site();    
+    var home = (Home)Model.Site();
 }
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <span class="navbar-brand">@home.SiteName</span>
@@ -22,7 +23,7 @@
         </ul>
         @if (Members.IsLoggedIn())
         {
-            using (Html.BeginUmbracoForm<Our.Umbraco.MembershipStarterKit.Controllers.SignInController>("SignOut"))
+            using (Html.BeginUmbracoForm<SignInController>("SignOut"))
             {
                 var profilePage = home.Children<Profile>().FirstOrDefault();
                 var profileModel = Members.GetCurrentMemberProfileModel();

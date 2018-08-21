@@ -1,6 +1,7 @@
-﻿@if (TempData.ContainsKey("Alert"))
+﻿@using Our.Umbraco.MembershipStarterKit.Models.ViewModels
+@if (TempData.ContainsKey("Alert"))
 {
-    var alert = TempData["Alert"] as Our.Umbraco.MembershipStarterKit.Models.ViewModels.AlertViewModel;
+    var alert = TempData["Alert"] as AlertViewModel;
 
     <div class="container">
         <div class="alert alert-@alert.Type alert-dismissible fade show mt-3" role="alert">

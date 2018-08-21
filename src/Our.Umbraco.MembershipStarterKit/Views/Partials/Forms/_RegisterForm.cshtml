@@ -1,5 +1,7 @@
-﻿@model Our.Umbraco.MembershipStarterKit.Models.ViewModels.RegisterViewModel
-@using (Html.BeginUmbracoForm<Our.Umbraco.MembershipStarterKit.Controllers.RegisterController>("Register"))
+﻿@using Our.Umbraco.MembershipStarterKit.Controllers
+@using Our.Umbraco.MembershipStarterKit.Models.ViewModels
+@model RegisterViewModel
+@using (Html.BeginUmbracoForm<RegisterController>("Register"))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
