@@ -82,6 +82,22 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             return CurrentUmbracoPage();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResendConfirmationEmail(string username)
+        {
+            var member = Members.GetByUsername(username);
+            if (member == null)
+            {
+                Alert("danger", "Member not found.");
+                return CurrentUmbracoPage();
+            }
+
+            SendConfirmationEmail(member.GetPropertyValue<string>("Email"));
+            Alert("success", "A confirmation email was sent to the email address you registered with.");
+            return RedirectToCurrentUmbracoPage();
+        }
+
         [HttpGet]
         public JsonResult IsEmailAvailable(string email)
         {

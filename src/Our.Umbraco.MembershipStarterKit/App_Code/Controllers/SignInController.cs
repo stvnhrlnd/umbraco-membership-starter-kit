@@ -43,7 +43,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
             var member = Members.GetByUsername(model.Username);
             if (!member.HasValue("confirmationDate"))
             {
-                Alert("danger", "Please confirm your email address to sign in.");
+                TempData["UnconfirmedMember"] = model.Username;
                 return CurrentUmbracoPage();
             }
 
