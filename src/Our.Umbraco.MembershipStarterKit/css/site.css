@@ -1,4 +1,23 @@
-﻿.input-validation-error {
+﻿html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 5rem;
+    padding-top: 3.5rem;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    bottom: 0;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    position: absolute;
+    width: 100%;
+}
+
+.input-validation-error {
     border-color: #dc3545;
 }
 
