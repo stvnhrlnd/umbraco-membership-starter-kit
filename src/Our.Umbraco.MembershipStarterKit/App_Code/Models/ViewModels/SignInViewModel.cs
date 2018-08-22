@@ -14,5 +14,8 @@ namespace Our.Umbraco.MembershipStarterKit.Models.ViewModels
         public string Password { get; set; }
 
         public string ForgotPasswordUrl { get; set; }
+
+        [Display(Name = "Remember me")]
+        public bool RememberMe { get; set; }
     }
 }

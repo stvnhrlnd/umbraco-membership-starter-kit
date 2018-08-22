@@ -19,10 +19,14 @@
             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "invalid-feedback" })
             @if (!string.IsNullOrWhiteSpace(Model.ForgotPasswordUrl))
             {
-                <a class="d-block font-weight-light mt-1" href="@Model.ForgotPasswordUrl">
+                <a class="float-right font-weight-light" href="@Model.ForgotPasswordUrl">
                     Forgot password?
                 </a>
             }
+            <div class="form-check mt-3">
+                @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-check-input" })
+                @Html.LabelFor(model => model.RememberMe, new { @class = "form-check-label" })
+            </div>
         </div>
     </div>
     <div class="text-center">

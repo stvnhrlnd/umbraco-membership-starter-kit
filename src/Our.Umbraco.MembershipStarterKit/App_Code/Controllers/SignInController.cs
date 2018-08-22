@@ -47,7 +47,7 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
                 return CurrentUmbracoPage();
             }
 
-            FormsAuthentication.SetAuthCookie(model.Username, true);
+            FormsAuthentication.SetAuthCookie(model.Username, model.RememberMe);
             return RedirectToLocal(returnUrl);
         }
 
