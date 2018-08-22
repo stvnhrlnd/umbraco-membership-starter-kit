@@ -1,4 +1,5 @@
 ﻿using Our.Umbraco.MembershipStarterKit.Models.ViewModels;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -34,16 +35,29 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
                 return CurrentUmbracoPage();
             }
 
-            if (!Membership.ValidateUser(model.Username, model.Password))
+            var member = Services.MemberService.GetByUsername(model.Username);
+            if (member == null)
             {
                 Alert("danger", "Invalid login attempt.");
                 return CurrentUmbracoPage();
             }
 
-            var member = Members.GetByUsername(model.Username);
-            if (!member.HasValue("confirmationDate"))
+            var confirmationDate = member.GetValue<DateTime?>("confirmationDate");
+            if (!confirmationDate.HasValue)
             {
                 TempData["UnconfirmedMember"] = model.Username;
+                return CurrentUmbracoPage();
+            }
+
+            if (member.IsLockedOut)
+            {
+                Alert("danger", "Your account has been locked due to several failed password attempts. You can unlock your account by resetting your password.");
+                return CurrentUmbracoPage();
+            }
+
+            if (!Membership.ValidateUser(model.Username, model.Password))
+            {
+                Alert("danger", "Invalid login attempt.");
                 return CurrentUmbracoPage();
             }
 

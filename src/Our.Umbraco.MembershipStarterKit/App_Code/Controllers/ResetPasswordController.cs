@@ -45,6 +45,8 @@ namespace Our.Umbraco.MembershipStarterKit.Controllers
                 return CurrentUmbracoPage();
             }
 
+            member.FailedPasswordAttempts = 0;
+            member.IsLockedOut = false;
             member.SetValue("passwordResetToken", null);
             member.SetValue("passwordResetTokenExpiry", null);
             Services.MemberService.Save(member);
