@@ -5,31 +5,25 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group row">
-        @Html.LabelFor(model => model.Username, new { @class = "col-sm-3 col-form-label" })
-        <div class="col-sm-9">
-            @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
-            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "invalid-feedback" })
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username)
+        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
+        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "invalid-feedback" })
     </div>
-    <div class="form-group row">
-        @Html.LabelFor(model => model.Password, new { @class = "col-sm-3 col-form-label" })
-        <div class="col-sm-9">
-            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "invalid-feedback" })
-            @if (!string.IsNullOrWhiteSpace(Model.ForgotPasswordUrl))
-            {
-                <a class="float-right font-weight-light" href="@Model.ForgotPasswordUrl">
-                    Forgot password?
-                </a>
-            }
-            <div class="form-check mt-3">
-                @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-check-input" })
-                @Html.LabelFor(model => model.RememberMe, new { @class = "form-check-label" })
-            </div>
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "invalid-feedback" })
+        @if (!string.IsNullOrWhiteSpace(Model.ForgotPasswordUrl))
+        {
+            <a class="float-right font-weight-light" href="@Model.ForgotPasswordUrl">
+                Forgot password?
+            </a>
+        }
     </div>
-    <div class="text-center">
-        <button type="submit" class="btn btn-primary">Sign In</button>
+    <div class="form-group form-check">
+        @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-check-input" })
+        @Html.LabelFor(model => model.RememberMe, new { @class = "form-check-label" })
     </div>
+    <button type="submit" class="btn btn-block btn-primary">Sign In</button>
 }
