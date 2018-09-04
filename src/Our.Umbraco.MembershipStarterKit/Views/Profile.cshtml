@@ -7,16 +7,20 @@
     var profile = Members.GetCurrentMemberProfileModel();
     <div class="container mt-4">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="media">
-                    @Html.GravatarImage(profile.Email, 100, cssClass: "img-thumbnail mr-3", defaultImage: GravatarHtmlHelper.DefaultImage.Identicon)
-                    <div class="media-body">
-                        <a class="btn btn-primary btn-sm float-right" href="#">Edit Profile</a>
-                        <h4 class="mt-0">@profile.Name</h4>
-                        <h5 class="font-weight-light">@profile.UserName</h5>
-                        <p>Last login: @profile.LastLoginDate.ToString("dd/MM/yyyy @ HH:mm")</p>
-                    </div>
-                </div>
+            <div class="col-md-8 col-lg-6 text-center">
+                @Html.GravatarImage(profile.Email, 100, cssClass: "img-thumbnail mb-2", defaultImage: GravatarHtmlHelper.DefaultImage.Identicon)
+                <h4 class="mb-1">@profile.Name</h4>
+                <h5 class="font-weight-light">@profile.UserName</h5>
+                <p><small>Last login: @profile.LastLoginDate.ToString("dd/MM/yyyy @ HH:mm")</small></p>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Edit Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Change Password</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
