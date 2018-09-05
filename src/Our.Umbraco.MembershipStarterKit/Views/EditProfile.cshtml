@@ -1,0 +1,16 @@
+﻿@using ClientDependency.Core.Mvc
+@inherits UmbracoViewPage<EditProfile>
+@{
+    Layout = "Master.cshtml";
+
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+    Html.RequiresJsBundle("ValidationScripts");
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            @Html.Action("EditProfile", "EditProfile")
+        </div>
+    </div>
+</div>

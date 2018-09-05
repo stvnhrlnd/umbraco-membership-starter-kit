@@ -1,0 +1,35 @@
+﻿@using Our.Umbraco.MembershipStarterKit.Controllers
+@using Our.Umbraco.MembershipStarterKit.Models.ViewModels
+@model EditProfileViewModel
+<h1 class="display-4 my-4 text-center">Edit Profile</h1>
+@using (Html.BeginUmbracoForm<EditProfileController>("EditProfile"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName)
+        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "First name" })
+        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "invalid-feedback" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Surname)
+        @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Surname" })
+        @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "invalid-feedback" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "invalid-feedback" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username)
+        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
+        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "invalid-feedback" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Bio)
+        @Html.TextAreaFor(model => model.Bio, new { @class = "form-control", placeholder = "Bio" })
+        @Html.ValidationMessageFor(model => model.Bio, "", new { @class = "invalid-feedback" })
+    </div>
+    <button type="submit" class="btn btn-block btn-primary">Update</button>
+}

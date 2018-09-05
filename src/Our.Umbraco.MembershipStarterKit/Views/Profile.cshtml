@@ -6,6 +6,7 @@
 {
     var member = Members.GetCurrentMember();
     var profile = Members.GetCurrentMemberProfileModel();
+    var editProfile = Model.Site().Children<EditProfile>().FirstOrDefault();
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6 text-center">
@@ -18,9 +19,12 @@
                     <p>@member.GetPropertyValue("bio")</p>
                 }
                 <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Edit Profile</a>
-                    </li>
+                    @if (editProfile != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@editProfile.Url">@editProfile.Name</a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a class="nav-link" href="#">Change Password</a>
                     </li>
