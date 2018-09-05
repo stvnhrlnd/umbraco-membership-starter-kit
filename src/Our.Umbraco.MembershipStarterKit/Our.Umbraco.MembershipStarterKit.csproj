@@ -325,6 +325,8 @@
     <Content Include="App_Code\Models\ViewModels\AlertViewModel.cs" />
     <Content Include="App_Code\Models\ViewModels\EditProfileViewModel.cs" />
     <Content Include="App_Code\Controllers\EditProfileController.cs" />
+    <Content Include="App_Code\Controllers\ChangePasswordController.cs" />
+    <Content Include="App_Code\Models\ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -387,6 +389,8 @@
     <Content Include="Views\Partials\_Alert.cshtml" />
     <Content Include="Views\EditProfile.cshtml" />
     <Content Include="Views\Partials\Forms\_EditProfileForm.cshtml" />
+    <Content Include="Views\ChangePassword.cshtml" />
+    <Content Include="Views\Partials\Forms\_ChangePasswordForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
